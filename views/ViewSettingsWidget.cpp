@@ -23,6 +23,9 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QString>
 
 ViewSettingsWidget::ViewSettingsWidget(QWidget *parent) :
     QWidget(parent),
@@ -33,6 +36,14 @@ ViewSettingsWidget::ViewSettingsWidget(QWidget *parent) :
 
     //ui->tabWidget->setCurrentIndex(0);
     //ui->tabWidget->removeTab(2);
+
+    socket = new QTcpSocket();
+    server = new QTcpServer();
+    ui->tabWidget->setTabText(0,"TCP");
+    ui->lineEdit_port->setText("8888");
+    ui->pushButton_send->setEnabled(false);
+
+
 
     QObject::connect(ui->floorplanOpen_pb, SIGNAL(clicked()), this, SLOT(floorplanOpenClicked()));
 
@@ -68,6 +79,15 @@ ViewSettingsWidget::ViewSettingsWidget(QWidget *parent) :
     QObject::connect(RTLSDisplayApplication::client(), SIGNAL(enableFiltering()), this, SLOT(enableFiltering()));
 
     QObject::connect(ui->logging_pb, SIGNAL(clicked()), this, SLOT(loggingClicked()));
+
+
+
+    //TCP
+    QObject::connect(socket, &QTcpSocket::readyRead, this, &ViewSettingsWidget::socket_Read_Data);
+    QObject::connect(socket, &QTcpSocket::disconnected, this, &ViewSettingsWidget::socket_Disconnected);
+    QObject::connect(server,&QTcpServer::newConnection,this,&ViewSettingsWidget::server_New_Connect);
+    QObject::connect(ui->pushButton_send,&QPushButton::clicked,this,&ViewSettingsWidget::on_pushButton_Send_clicked);
+    QObject::connect(ui->pushButton_connect,&QPushButton::clicked,this,&ViewSettingsWidget::on_pushButton_Connect_clicked);
 
     _logging = false ;
 
@@ -164,6 +184,8 @@ int ViewSettingsWidget::applyFloorPlanPic(const QString &path)
 
     return 0;
 }
+
+
 
 void ViewSettingsWidget::getFloorPlanPic()
 {
@@ -344,6 +366,96 @@ void ViewSettingsWidget::loggingClicked(void)
         ui->label_logfile->setText("");
         ui->saveFP->setChecked(false);
         _logging = false ;
+    }
+}
+
+//TCP
+void ViewSettingsWidget::TCPSendtagPos(quint64 tagId, double x, double y, double z)
+{
+    if (ui->checkBox_keep->isChecked())
+    {
+        if (ui->pushButton_connect->text() == tr("disconnect"))
+        {
+            QString msg = "D:";
+            msg.append(QString::number(x, 'f', 2));
+            msg.append(",");
+            msg.append(QString::number(y, 'f', 2));
+            msg.append(",");
+            msg.append(QString::number(z, 'f', 2));
+
+            qDebug()<< msg << endl;
+
+            socket->write(msg.toUtf8());
+            socket->flush();
+        }
+    }
+}
+
+void ViewSettingsWidget::socket_Read_Data()
+{
+    QByteArray buffer;
+        //读取缓冲区数据
+        buffer = socket->readAll();
+        if(!buffer.isEmpty())
+        {
+
+        }
+}
+
+void ViewSettingsWidget::socket_Disconnected()
+{
+    ui->pushButton_send->setEnabled(false);
+    ui->pushButton_connect->setText("connect");
+}
+
+void ViewSettingsWidget::server_New_Connect()
+{
+    //获取客户端连接
+    socket = server->nextPendingConnection();
+    //连接QTcpSocket的信号槽，以读取新数据
+    QObject::connect(socket, &QTcpSocket::readyRead, this, &ViewSettingsWidget::socket_Read_Data);
+    QObject::connect(socket, &QTcpSocket::disconnected, this, &ViewSettingsWidget::socket_Disconnected);
+    //发送按键使能
+    ui->pushButton_send->setEnabled(true);
+
+    qDebug() << "A Client connect!";
+}
+
+void ViewSettingsWidget::on_pushButton_Send_clicked()
+{
+    QString msg = "T:";
+    msg.append(ui->lineEdit_X->text());
+    msg.append(",");
+    msg.append(ui->lineEdit_Y->text());
+    socket->write(msg.toUtf8());
+    socket->flush();
+}
+
+void ViewSettingsWidget::on_pushButton_Connect_clicked()
+{
+    if(ui->pushButton_connect->text() == tr("connect"))
+    {
+        //从输入框获取端口号
+        int port = ui->lineEdit_port->text().toInt();
+
+        //监听指定的端口
+        if(!server->listen(QHostAddress::Any, port))
+        {
+            //若出错，则输出错误信息
+            qDebug()<<server->errorString();
+            return;
+        }
+        //修改按键文字
+        ui->pushButton_connect->setText("disconnect");
+        ui->pushButton_send->setEnabled(true);
+
+        //qDebug()<< "Listen succeessfully!";
+    }
+    else
+    {
+        socket->close();
+        ui->pushButton_connect->setText("connect");
+        ui->pushButton_send->setEnabled(false);
     }
 }
 

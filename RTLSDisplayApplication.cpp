@@ -38,9 +38,9 @@ RTLSDisplayApplication::RTLSDisplayApplication(int &argc, char **argv) : QApplic
 
     _ready = false;
 
-    this->setOrganizationName("Decawave");
-    this->setOrganizationDomain("decawave.com");
-    this->setApplicationName("TREKDisplay");
+    this->setOrganizationName("GUET");
+    this->setOrganizationDomain("AngryBeast");
+    this->setApplicationName("ERCIYUAN");
 
     _viewSettings = new ViewSettings(this);
 

@@ -23,8 +23,106 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
+     <widget class="QWidget" name="tab_TCP">
+      <attribute name="title">
+       <string>页</string>
+      </attribute>
+      <widget class="QWidget" name="horizontalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>160</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_37">
+          <property name="text">
+           <string>Port</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_port"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_connect">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>30</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="gridLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>160</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_38">
+          <property name="text">
+           <string>Target X:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_X"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_39">
+          <property name="text">
+           <string>Target Y:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_Y"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_send">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>130</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Send</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_keep">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>151</width>
+         <height>19</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>keepSendData</string>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="config_tab">
       <attribute name="title">
        <string>Configuration</string>
@@ -557,7 +655,7 @@
         <rect>
          <x>9</x>
          <y>21</y>
-         <width>132</width>
+         <width>172</width>
          <height>111</height>
         </rect>
        </property>
