@@ -269,12 +269,14 @@ void MainWindow::saveSettings()
 
 void MainWindow::onAboutAction()
 {
-    _infoLabel->setText(tr("Invoked <b>Help|About</b>"));
-    QMessageBox::about(this, tr("About"),
-            tr("<b>DecaRangeRTLS</b>"
-               "<br>version 3.6 (" __DATE__
-               ") <br>Copyright (C) 2016, Decawave Ltd.\n"
-               "<br>www.decawave.com"));
+//    _infoLabel->setText(tr("Invoked <b>?|!</b>"));
+//    QMessageBox::about(this, tr("About"),
+//            tr("<b>DecaRangeRTLS</b>"
+//               "<br>version 3.6 (" __DATE__
+//               ") <br>Copyright (C) 2016, Decawave Ltd.\n"
+//               "<br>www.decawave.com"));
+//    QMessageBox::about(this, tr("About"),
+//            tr("<b>DecaRangeRTLS</b>"));
 }
 
 void MainWindow::loadConfigFile(QString filename)

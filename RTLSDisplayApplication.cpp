@@ -17,6 +17,7 @@
 #include "RTLSClient.h"
 #include "ViewSettings.h"
 #include "GraphicsWidget.h"
+#include "ViewSettingsWidget.h"
 
 #include <QMetaProperty>
 #include <QDesktopWidget>
@@ -72,6 +73,9 @@ RTLSDisplayApplication::RTLSDisplayApplication(int &argc, char **argv) : QApplic
 
     QObject::connect(_client, SIGNAL(ancRanges(int, int, int)), graphicsWidget(), SLOT(ancRanges(int, int, int)));
     //emit ready signal so other components can finish initialisation
+
+    //my
+    QObject::connect(_client,&RTLSClient::tagPos,mainWindow()->viewSettingsWidget(),&ViewSettingsWidget::TCPSendtagPos);
     emit ready();
 }
 

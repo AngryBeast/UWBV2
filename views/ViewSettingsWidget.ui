@@ -61,7 +61,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Connect</string>
+        <string>connect</string>
        </property>
       </widget>
       <widget class="QWidget" name="gridLayoutWidget">

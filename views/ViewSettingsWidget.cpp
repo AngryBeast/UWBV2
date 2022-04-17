@@ -398,7 +398,7 @@ void ViewSettingsWidget::socket_Read_Data()
         buffer = socket->readAll();
         if(!buffer.isEmpty())
         {
-
+            qDebug()<< buffer << endl;
         }
 }
 

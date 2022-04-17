@@ -45,7 +45,7 @@ GraphicsWidget::GraphicsWidget(QWidget *parent) :
     //tagTable
     //Tag ID, x, y, z, r95, vbat? ...
     QStringList tableHeader;
-    tableHeader << "Tag ID/Label" << "X\n(m)" << "Y\n(m)" << "Z\n(m)" << "R95 \n(m)"
+    tableHeader << "Tag ID" << "X\n(m)" << "Y\n(m)" << "Z\n(m)" << "R95 \n(m)"
                 << "Anc 0\n range (m)" << "Anc 1\n range (m)" << "Anc 2\n range (m)" << "Anc 3\n range (m)"
                    ;
     ui->tagTable->setHorizontalHeaderLabels(tableHeader);
@@ -62,6 +62,7 @@ GraphicsWidget::GraphicsWidget(QWidget *parent) :
     ui->tagTable->setColumnWidth(ColumnRA1,70);
     ui->tagTable->setColumnWidth(ColumnRA2,70);
     ui->tagTable->setColumnWidth(ColumnRA3,70);
+    ui->tagTable->setColumnHidden(ColumnRA3, true);
 
     ui->tagTable->setColumnHidden(ColumnIDr, true); //ID raw hex
     //ui->tagTable->setColumnWidth(ColumnIDr,70); //ID raw hex

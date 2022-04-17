@@ -6,14 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1074</width>
-    <height>300</height>
+    <width>1448</width>
+    <height>787</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0" colspan="2">
+    <widget class="GraphicsView" name="graphicsView"/>
+   </item>
    <item row="0" column="0">
     <widget class="QTableWidget" name="anchorTable">
      <property name="sizePolicy">
@@ -51,10 +54,10 @@
      <property name="columnCount">
       <number>12</number>
      </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
+     <attribute name="horizontalHeaderMinimumSectionSize">
       <number>70</number>
      </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
+     <attribute name="horizontalHeaderDefaultSectionSize">
       <number>70</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
@@ -63,14 +66,14 @@
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>18</number>
+     </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>18</number>
      </attribute>
      <attribute name="verticalHeaderHighlightSections">
       <bool>true</bool>
-     </attribute>
-     <attribute name="verticalHeaderMinimumSectionSize">
-      <number>18</number>
      </attribute>
      <row/>
      <row/>
@@ -89,9 +92,6 @@
      <column/>
      <column/>
     </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="GraphicsView" name="graphicsView"/>
    </item>
    <item row="0" column="1">
     <widget class="QTableWidget" name="tagTable">
@@ -130,19 +130,19 @@
      <property name="columnCount">
       <number>10</number>
      </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
+     <attribute name="horizontalHeaderMinimumSectionSize">
       <number>70</number>
      </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
+     <attribute name="horizontalHeaderDefaultSectionSize">
       <number>70</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
-     <attribute name="verticalHeaderDefaultSectionSize">
+     <attribute name="verticalHeaderMinimumSectionSize">
       <number>18</number>
      </attribute>
-     <attribute name="verticalHeaderMinimumSectionSize">
+     <attribute name="verticalHeaderDefaultSectionSize">
       <number>18</number>
      </attribute>
      <column/>
